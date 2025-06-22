@@ -2,27 +2,22 @@ name: Daily Commit Workflow
 
 on:
   schedule:
-    - cron: "15 4 * * *"
-  workflow_dispatch:
+    - cron: '27 4 * * *'  # Runs daily at 04:27 UTC
+  workflow_dispatch:      # Optional: allows manual trigger from UI
 
 jobs:
   daily-commit:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Add timestamp file (email: 23f2001915@ds.study.iitm.ac.in)
+      - name: Add daily commit by 23f2001915@ds.study.iitm.ac.in
         run: |
-          echo "Last update: $(date -u)" > daily-status.txt
-
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add daily-status.txt
-          git commit -m "Daily update from GitHub Actions [skip ci]" || echo "No changes to commit"
+          echo "Last updated on $(date -u)" > daily_status.txt
+          git config user.name "GitHub Action Bot"
+          git config user.email "23f2001915@ds.study.iitm.ac.in"
+          git add daily_status.txt
+          git commit -m "Automated daily commit - $(date -u)" || echo "No changes to commit"
           git push
