@@ -26,4 +26,3 @@ jobs:
           git add daily-status.txt
           git commit -m "Daily update from GitHub Actions [skip ci]" || echo "No changes to commit"
           git push
-
