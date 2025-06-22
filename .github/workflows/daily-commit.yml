@@ -2,16 +2,21 @@ name: Daily Commit Workflow
 
 on:
   schedule:
-    - cron: '27 4 * * *'  # Runs daily at 04:27 UTC
-  workflow_dispatch:      # Optional: allows manual trigger from UI
+    - cron: '25 18 * * *'  # Adjust the time as needed (UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  daily-commit:
+  commit-daily:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add daily commit by 23f2001915@ds.study.iitm.ac.in
         run: |
