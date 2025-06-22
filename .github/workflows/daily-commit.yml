@@ -3,11 +3,12 @@ name: Daily Commit Workflow
 on:
   schedule:
     - cron: "15 4 * * *"  # Runs daily at 04:15 UTC
-  workflow_dispatch:       # Allows manual triggering
+  workflow_dispatch:       # Allows manual triggers
 
 jobs:
   daily-commit:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
 
